@@ -1,32 +1,23 @@
 package com.incubyte.StringCalculator;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class Calculator {
 
-	public int sum(String numbers) {
+	public int sum(String numbers) throws Exception {
 
 		if (numbers.isEmpty()) {
 
 			return 0;
 
-		} else if (numbers.length() == 1) {
-
-			return Integer.parseInt(numbers);
-
 		} else {
-
-			String[] num = numbers.split(",");
-
-			int num1 = Integer.parseInt(num[0]);
-			int num2 = Integer.parseInt(num[1]);
-
-			return num1 + num2;
-
+			Stream<String> num = Arrays.stream(numbers.split(",|\n"));
+			return num.mapToInt(Integer::parseInt).sum();
 		}
-	}
 	
-
-
-}
+	}
+}	
