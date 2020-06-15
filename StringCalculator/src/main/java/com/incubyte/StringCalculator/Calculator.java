@@ -1,23 +1,37 @@
 package com.incubyte.StringCalculator;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
-import org.springframework.stereotype.Component;
 
-@Component
 public class Calculator {
 
-	public int sum(String numbers) throws Exception {
+	private String delimeter;
+	private String numbers;
 
-		if (numbers.isEmpty()) {
-
-			return 0;
-
-		} else {
-			Stream<String> num = Arrays.stream(numbers.split(",|\n"));
-			return num.mapToInt(Integer::parseInt).sum();
-		}
-	
+	private Calculator(String delimeter, String numbers) {
+		super();
+		this.delimeter = delimeter;
+		this.numbers = numbers;
 	}
-}	
+
+	private int sum() {
+		return Arrays.stream(numbers.split(delimeter)).mapToInt(Integer::parseInt).sum();
+	}
+
+	public static int sum(String input) throws Exception {
+		if (input.isEmpty()) {
+			return 0;
+		} else {
+			return parseInput(input).sum();
+		}
+	}
+
+	private static Calculator parseInput(String input) {
+		if (input.startsWith("//")) {
+			String[] div = input.split("\n", 2);
+			return new Calculator(div[0].substring(2), div[1]);
+		} else {
+			return new Calculator(",|\n", input);
+		}
+	}
+}
