@@ -42,6 +42,7 @@ public class TestCalculator extends StringCalculatorApplicationTests {
 	@Test
 	public void sumTwoNumbersUsingDifferentDelimeter() throws Exception {
 		assertEquals(Calculator.sum("//;\n1;2"), 3);
+		assertEquals(Calculator.sum("//.\n1.2.3"), 6);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -54,5 +55,11 @@ public class TestCalculator extends StringCalculatorApplicationTests {
 		assertEquals(Calculator.sum("10,1001"),10);
 		assertEquals(Calculator.sum("1001,10002,2"), 2);
 		assertEquals(Calculator.sum("1001,10002,2000,999"), 999);
+		assertEquals(Calculator.sum("1001,10002"), 0);
+	}
+	
+	@Test
+	public void acceptsMultiCharDelimiter() throws Exception {
+		assertEquals(Calculator.sum("//[***]\n1***2***3"), 6);
 	}
 }

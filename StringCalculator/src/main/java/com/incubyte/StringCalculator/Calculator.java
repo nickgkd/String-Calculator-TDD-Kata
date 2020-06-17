@@ -1,6 +1,7 @@
 package com.incubyte.StringCalculator;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 
@@ -38,9 +39,18 @@ public class Calculator {
 	private static Calculator parseInput(String input) {
 		if (input.startsWith("//")) {
 			String[] div = input.split("\n", 2);
-			return new Calculator(div[0].substring(2), div[1]);
+			return new Calculator(parseDelimiter(div[0]), div[1]);
 		} else {
 			return new Calculator(",|\n", input);
 		}
+	}
+
+
+	private static String parseDelimiter(String div) {
+		String delimiter = div.substring(2);
+		if(delimiter.startsWith("[")) {
+			delimiter = delimiter.substring(1,delimiter.length()-1);
+		}
+		return Pattern.quote(delimiter);
 	}
 }
