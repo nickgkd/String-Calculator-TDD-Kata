@@ -43,4 +43,9 @@ public class TestCalculator extends StringCalculatorApplicationTests {
 	public void sumTwoNumbersUsingDifferentDelimeter() throws Exception {
 		assertEquals(Calculator.sum("//;\n1;2"), 3);
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void exceptionIfNumbersIsNegative() throws Exception {
+		Calculator.sum("-1");
+	}
 }

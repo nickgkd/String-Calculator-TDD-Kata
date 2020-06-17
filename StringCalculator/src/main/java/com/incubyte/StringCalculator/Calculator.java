@@ -1,6 +1,7 @@
 package com.incubyte.StringCalculator;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 
 public class Calculator {
@@ -14,8 +15,16 @@ public class Calculator {
 		this.numbers = numbers;
 	}
 
+	
 	private int sum() {
-		return Arrays.stream(numbers.split(delimeter)).mapToInt(Integer::parseInt).sum();
+		if(getNumbers().anyMatch(n->n<0)) {
+			throw new IllegalArgumentException();
+		}
+		return getNumbers().sum();
+	}
+	
+	private IntStream getNumbers() {
+		return Arrays.stream(numbers.split(delimeter)).mapToInt(Integer::parseInt);
 	}
 
 	public static int sum(String input) throws Exception {
