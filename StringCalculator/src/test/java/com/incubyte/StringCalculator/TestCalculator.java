@@ -48,4 +48,11 @@ public class TestCalculator extends StringCalculatorApplicationTests {
 	public void exceptionIfNumbersIsNegative() throws Exception {
 		Calculator.sum("-1");
 	}
+	
+	@Test
+	public void ignoreNumbersGreaterThan1000() throws Exception {
+		assertEquals(Calculator.sum("10,1001"),10);
+		assertEquals(Calculator.sum("1001,10002,2"), 2);
+		assertEquals(Calculator.sum("1001,10002,2000,999"), 999);
+	}
 }

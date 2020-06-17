@@ -19,8 +19,8 @@ public class Calculator {
 	private int sum() {
 		if(getNumbers().anyMatch(n->n<0)) {
 			throw new IllegalArgumentException();
-		}
-		return getNumbers().sum();
+		} 
+		return getNumbers().filter(n->n<1000).sum();
 	}
 	
 	private IntStream getNumbers() {
