@@ -62,4 +62,11 @@ public class TestCalculator extends StringCalculatorApplicationTests {
 	public void acceptsMultiCharDelimiter() throws Exception {
 		assertEquals(Calculator.sum("//[***]\n1***2***3"), 6);
 	}
+	
+	@Test
+	public void accpetsMultipleDelimiter() throws Exception {
+		assertEquals(Calculator.sum("//[-][;]\n1-2;3"), 6);
+		assertEquals(Calculator.sum("//[*][%]\n1*2%3"), 6);
+		assertEquals(Calculator.sum("//[***][%%%]\n1***2%%%3"), 6);
+	}
 }
